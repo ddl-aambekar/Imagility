@@ -5,7 +5,8 @@ The setup for this project entails the following:
 2. Amazon SQS for sending messages to EC2.
 3. DynamoDB for status keeping of all images.
 4. AWS Lambda for updating process status of images in dynamodb, fetching email_id of developer who uploaded image, and sending email via AWS SES to the requestor.
-5. Autoscaling group of EC2s to ensure availability, resiliency, and scaling of models according to incoming message traffic. 
+5. Autoscaling group of EC2s to ensure availability, resiliency, and scaling of models according to incoming message traffic.
+6. AWS CloudWatch for monitoring and alerting on approx age of oldest messages in SQS and average CPU Utilization to trigger autoscaling.
 
 
 # AWS Setup
