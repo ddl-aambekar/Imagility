@@ -1,11 +1,11 @@
 # Imagility
 
-To run the code in this repo, you will need the following tools-
-1. Terraform
-2. Ansible
-3. AWS
-4. 
-
+The setup for this project entails the following:
+1. 2 S3 buckets, one for raw input images and another for output processed images, respectively.
+2. Amazon SQS for sending messages to EC2.
+3. DynamoDB for status keeping of all images.
+4. AWS Lambda for updating process status of images in dynamodb, fetching email_id of developer who uploaded image, and sending email via AWS SES to the requestor.
+5. Autoscaling group of EC2s to ensure availability, resiliency, and scaling of models according to incoming message traffic. 
 
 
 # AWS Setup
