@@ -5,6 +5,9 @@ import boto3
 UPLOAD_FOLDER = '/Users/akshayambekar/Documents/Imagility/Uploaded'
 RAW_INPUT_IMAGES_S3_BUCKET_NAME = 'inputimagesyoukea'
 ALLOWED_EXTENSIONS = set(['png', 'jpg', 'jpeg', 'gif'])
+DYNAMODB_TABLE_NAME_FOR_STATUS_KEEPING = 'image_email_mapper'
+SQS_QUEUE_NAME = 'input_image_queue'
+AWS_ACCOUNT_ID = '<YOUR_ACCOUNT_ID_HERE>'
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -79,7 +82,7 @@ def convertImageToByteArray(file):
 
 def putItemInDynamoDb(file, emailid):
     dynamodb = boto3.resource('dynamodb')
-    table = dynamodb.Table('image_email_mapper')
+    table = dynamodb.Table(DYNAMODB_TABLE_NAME_FOR_STATUS_KEEPING)
 
     response = table.put_item(
         Item={
@@ -95,8 +98,8 @@ def getMsgFromSQS():
     sqs = boto3.client('sqs')
 
     queue_url = sqs.get_queue_url(
-        QueueName='input_image_queue',
-        QueueOwnerAWSAccountId='752037247638'
+        QueueName=SQS_QUEUE_NAME,
+        QueueOwnerAWSAccountId=''
     ).get('QueueUrl')
 
     response = sqs.receive_message(
@@ -136,7 +139,7 @@ def sendMsgToSQS(file):
 
     queue_url = sqs.get_queue_url(
         QueueName='input_image_queue',
-        QueueOwnerAWSAccountId='752037247638'
+        QueueOwnerAWSAccountId=AWS_ACCOUNT_ID
     ).get('QueueUrl')
 
     b = convertImageToByteArray(file)
