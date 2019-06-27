@@ -11,6 +11,7 @@ import os
 from multiprocessing import Pool
 import logging
 sqs_logger = logging.getLogger('sqs_listener')
+PROCESSED_IMAGE_BUCKET_NAME = 'processedimagesyoukea'
 
 def run_process(_process, process_name):
     '''
@@ -45,7 +46,7 @@ def pred_to_binvox(voxel_file):
     with open(fname, 'wb') as f:
         bvox.write(f)
         print('Sending file to s3 : '+str(fname))
-        s3.meta.client.upload_file(fname, 'processedimagesyoukea', ntpath.basename(fname))
+        s3.meta.client.upload_file(fname, PROCESSED_IMAGE_BUCKET_NAME, ntpath.basename(fname))
         print('Deleting file '+str(ntpath.basename(fname))+'raw input files')
         os.remove('./demo/input/'+ntpath.basename(fname)[:-7])
 
