@@ -15,7 +15,7 @@ The setup for this project entails the following:
 3. DynamoDB for keeping status of processing of all images.
 4. AWS Lambda for updating process status of images in dynamodb, fetching email of developer who uploaded image, and sending an email to retrieve the processed file from S3, via AWS SES, to the requestor.
 5. Autoscaling group of EC2s to ensure availability, resiliency, and scaling of models according to incoming message traffic.
-6. AWS CloudWatch for monitoring and alerting on approx. age of oldest messages in SQS and average CPU Utilization to trigger autoscaling.
+6. AWS CloudWatch for monitoring and alerting on approx. age of oldest messages in SQS.
 
 
 # AWS Setup
