@@ -88,7 +88,7 @@ def putItemInDynamoDb(file, emailid):
         Item={
             'file_name': file.filename,
             'email_id': emailid,
-            'status': 'processing',
+            'file_status': 'processing',
         }
     )
     return response
