@@ -20,6 +20,27 @@ exports.handler = function(event, context, callback) {
     } else {
         keyForDynamoDb = myKey;
     }
+
+    var updateParams = {
+        TableName:TABLE_NAME,
+        Key: {
+          file_name : keyForDynamoDb,
+        },
+        UpdateExpression: "set file_status = :p",
+        ExpressionAttributeValues: {
+            ":p": "processed"
+        }
+    };
+
+    console.log("Updating the item...");
+    dynamoDb.update(updateParams, function(err, data) {
+        if (err) {
+            console.error("Unable to update item. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("UpdateItem succeeded:", JSON.stringify(data, null, 2));
+        }
+    });
+
     console.log('Key to search in DynamoDB: '+keyForDynamoDb);
     const params = {
     TableName: TABLE_NAME,
