@@ -88,7 +88,7 @@ resource "aws_s3_bucket_public_access_block" "input-image-s3-bucket" {
 }
 
 resource "aws_s3_bucket" "processed-image-bucket" {
-  bucket = "processed-image-bucket"
+  bucket = "processedimagesyoukea"
 
   tags = {
     Name        = "Processed image bucket"
