@@ -34,7 +34,7 @@ export AWS_SECRET_ACCESS_KEY=wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 ```
 Then source your profile ```source ~/.bash_profile``` and now your laptop will be fully authorized to create resources on AWS!
 
-# Steps to run this project
+# Files in this project
 
 1. Flask app (app.py): This file contains the flask app code. Run the file by navigating to the file path in your favorite terminal and type
 ```
